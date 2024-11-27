@@ -3,14 +3,14 @@
         <h2>Register</h2>
         <form @submit.prevent="submit()">
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input v-model="form.name" type="text" id="name" class="form-control" />
-                <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
+                <label for="name" class="form-label">Orgeh</label>
+                <input v-model="form.orgeh" type="text" id="orgeh" class="form-control" />
+                <div v-if="errors.orgeh" class="text-danger">{{ errors.orgeh }}</div>
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input v-model="form.email" type="email" id="email" class="form-control" />
-                <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
+                <label for="bagian" class="form-label">Bagian</label>
+                <input v-model="form.bagian" type="text" id="bagian" class="form-control" />
+                <div v-if="errors.bagian" class="text-danger">{{ errors.bagian }}</div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
@@ -33,8 +33,8 @@ import { useToast } from "vue-toastification";
 defineProps({ errors: Object })
 
 const form = useForm({
-    name: '',
-    email: '',
+    orgeh: '',
+    bagian: '',
     password: '',
     password_confirmation: '',
 });

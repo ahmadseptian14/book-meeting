@@ -19,11 +19,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'orgeh' => 'required',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('orgeh', 'password'))) {
             return redirect()->route('index');
         }
 
@@ -38,15 +38,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'orgeh' => 'required|string|unique:users',
             'password' => 'required|confirmed|min:8',
+            'bagian' => 'required'
         ]);
 
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'orgeh' => $request->orgeh,
             'password' => Hash::make($request->password),
+            'bagian' => $request->bagian,
         ]);
 
         return redirect()->route('login.view');

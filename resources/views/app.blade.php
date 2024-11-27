@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="/admin-lte/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="/admin-lte/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="/admin-lte/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     @inertia
@@ -54,8 +56,9 @@
     <!-- AdminLTE App -->
     <script src="/admin-lte/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/admin-lte/dist/js/demo.js"></script>
+    {{-- <script src="/admin-lte/dist/js/demo.js"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/admin-lte/dist/js/pages/dashboard.js"></script>
+    <script src="/admin-lte/plugins/select2/js/select2.full.min.js"></script>
 </body>
 </html>

@@ -34,7 +34,6 @@ const toast = useToast();
 const form = useForm({});
 
 const logout = async () => {
-   if (window.confirm('Yakin akan melakukan logout??')) {
     await form.post(route('logout'), {
         onSuccess: () => {
             toast.success('Berhasil Logout');
@@ -43,6 +42,5 @@ const logout = async () => {
             toast.error('Gagal logout. Silahkan coba lagi')
         }
     })
-   }
 }
 </script>

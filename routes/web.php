@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [RuanganController::class, 'index'])->name('ruangan.index');
         Route::get('/booking', [RuanganController::class, 'booking'])->name('ruangan.booking');
         Route::post('/booking-store', [RuanganController::class, 'bookingStore'])->name('ruangan.booking-store');
+        Route::delete('/booking-delete/{bookRuangan}', [RuanganController::class, 'bookingDelete'])->name('ruangan.booking-delete');
 
     });
 });

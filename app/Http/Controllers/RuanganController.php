@@ -17,13 +17,12 @@ class RuanganController extends Controller
         if ($request->has('search')) {
             $query->where('agenda', 'like', '%' . $request->search . '%')
                 ->orWhere('bagian', 'like', '%' . $request->search . '%')
-                ->orWhere('tanggal', 'like', '%' . $request->search . '%');
+                ->orWhere('tanggal', 'like', '%' . $request->search . '%')
+                ->orWhere('ruang_meeting', 'like', '%' . $request->search . '%');
         }
 
-        // Dapatkan hasil paginasi
         $ruangans = $query->orderBy('created_at', 'desc')->paginate(20);
 
-        // Kirim data ke Vue
         return inertia('Ruangan/Index', [
             'ruangans' => $ruangans,
         ]);
@@ -50,6 +49,24 @@ class RuanganController extends Controller
 
         $tanggal = Carbon::parse($request->tanggal)->format('d/m/Y');
 
+        $conflict = BookRuangan::where('ruang_meeting', $request->ruang_meeting)
+            ->where('tanggal', $tanggal)
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('mulai_meeting', [$request->mulai_meeting, $request->selesai_meeting])
+                    ->orWhereBetween('selesai_meeting', [$request->mulai_meeting, $request->selesai_meeting])
+                    ->orWhere(function ($query) use ($request) {
+                        $query->where('mulai_meeting', '<=', $request->mulai_meeting)
+                            ->where('selesai_meeting', '>=', $request->selesai_meeting);
+                    });
+            })
+            ->exists();
+
+        if ($conflict) {
+            return redirect()->back()->withErrors([
+                'error' => 'Ruangan sudah dibooking pada waktu yang dipilih. Silakan pilih ruangan lain.'
+            ]);
+        }
+
         BookRuangan::create([
             'agenda' => $request->agenda,
             'bagian' => $request->bagian,
@@ -58,6 +75,13 @@ class RuanganController extends Controller
             'mulai_meeting' => $request->mulai_meeting,
             'selesai_meeting' => $request->selesai_meeting,
         ]);
+
+        return redirect()->route('ruangan.index');
+    }
+
+    public function bookingDelete(BookRuangan $bookRuangan)
+    {
+        $bookRuangan->delete();
 
         return redirect()->back();
     }

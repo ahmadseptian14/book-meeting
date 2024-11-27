@@ -3,9 +3,9 @@
         <h2>Login</h2>
         <form @submit.prevent="submit()">
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input v-model="form.email" type="email" id="email" class="form-control" />
-                <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
+                <label for="orgeh" class="form-label">Orgeh</label>
+                <input v-model="form.orgeh" type="text" id="orgeh" class="form-control" />
+                <div v-if="errors.orgeh" class="text-danger">{{ errors.orgeh }}</div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
@@ -24,7 +24,7 @@ import { useToast } from "vue-toastification";
 defineProps({ errors:Object })
 
 const form = useForm({
-    email: '',
+    orgeh: '',
     password: '',
 });
 
@@ -38,7 +38,7 @@ const submit = async () => {
         },
         onError: (errors) => {
             console.log(errors);
-            toast.error('Login gagal. Silakan cek input Anda.');
+            toast.error('Login gagal. Silakan cek orgeh dan passsword anda.');
         },
     });
 };
